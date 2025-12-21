@@ -2,6 +2,7 @@ import express from "express";
 import router from "./src/api/profileId/route.js";
 import { postRouterPosts } from "./src/api/posts/route.js";
 import cors from "cors"
+import routerReg from "./src/api/regProfile/route.js";
 
 const app = express();
 
@@ -13,6 +14,7 @@ async function main() {
   }))
   app.use("/api/profileId", router)
   app.use("/api/posts", postRouterPosts)
+  app.use("/api/regProfile", routerReg)
   app.listen(8089, () => {
     console.log(`Сервер запущен на порте 8089`);
   });
