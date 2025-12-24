@@ -4,11 +4,11 @@ const routerReg = Router();
 
 routerReg.post("/", async (req, res) => {
   try {
-    const { username, email } = req.body;
+    const { usernameForm, emailForm, tag, day, year, month } = req.body;
 
     const [checkEmail] = await model.query(
       "SELECT * FROM profiles WHERE emails = ?",
-      [email]
+      [emailForm]
     );
 
     if (Array.isArray(checkEmail) && checkEmail.length === 1) {
@@ -19,15 +19,18 @@ routerReg.post("/", async (req, res) => {
     }
 
     const [addEmail] = await model.query(
-      "INSERT INTO profiles (username, emails) VALUES(?, ?)",
-      [username, email]
+      "INSERT INTO profiles (username, emails, tag) VALUES(?, ?, ?)",
+      [usernameForm, emailForm, tag]
     );
 
     return res.status(200).json({
       ok: true,
       id: addEmail.insertId,
-      username,
-      email,
+      usernameForm,
+      emailForm,
+      tag,
+      month, 
+      year
     });
   } catch (e) {
     console.log(e);
