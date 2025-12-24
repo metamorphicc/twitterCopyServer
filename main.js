@@ -4,6 +4,8 @@ import { postRouterPosts } from "./src/api/posts/route.js";
 import cors from "cors"
 import routerReg from "./src/api/regProfile/route.js";
 import { routerGetProfiles } from "./src/api/profiles/route.js"; 
+import { getPostsRouter } from "./src/api/getPosts/router.js";
+
 const app = express();
 
 async function main() {
@@ -17,6 +19,7 @@ async function main() {
     origin: "http://localhost:3000",
     credentials: true,
   }))
+  app.use("/api/getPosts", getPostsRouter)
   app.use("/api/profiles", routerGetProfiles)
   app.use("/api/profileId", router)
   app.use("/api/posts", postRouterPosts)
