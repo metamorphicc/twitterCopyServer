@@ -5,7 +5,7 @@ const router = Router();
 
 router.post("/", async (req, res) => {
   try {
-    const { text, id } = req.body;
+    const { text, id} = req.body;
     const [rer] = await model.query(
       "INSERT INTO posts (content, profile_id) VALUES (?, ?)",
       [text, id]
