@@ -3,6 +3,20 @@ import { model } from "../../db.js";
 
 const router = Router();
 
+router.get("/", async (req, res) => {
+  try {
+    const [row] = await model.query("SELECT * FROM posts")
+
+    res.status(200).json({
+      ok: true,
+      row
+    })
+    console.log(row)
+  } catch (err) {
+    console.log(err)
+  } 
+})
+
 router.post("/", async (req, res) => {
   try {
     const { text, id} = req.body;
