@@ -25,11 +25,10 @@ router.post("/", async (req, res) => {
       [text, id]
     );
 
-    const res = rer.json()
-
-    res.sendStatus(204).json(
+    res.status(200).json(
       {
         ok: true,
+        postId: rer.insertId,
         id,
         text,
       }
